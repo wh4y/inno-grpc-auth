@@ -1,0 +1,3 @@
+[submodule "grpc"]
+	path = libs/grpc
+	url = https://github.com/wh4y/grpc
