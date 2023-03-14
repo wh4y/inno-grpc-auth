@@ -15,8 +15,7 @@ export class UserService implements OnModuleInit {
 
   public async isUserExistByLoginOrEmail(options: IsUserExistByLoginOrEmailRequest): Promise<IsUserExistByLoginOrEmailResponse> {
     const observableResponse = await this.userExternalService.isUserExistByLoginOrEmail(options);
-    const response = await observableResponse.toPromise();
 
-    return response;
+    return observableResponse.toPromise();
   }
 }
