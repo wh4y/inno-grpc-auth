@@ -1,9 +1,7 @@
-import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
-import { lastValueFrom } from 'rxjs';
 
-import { IsUserExistByLoginOrEmailResponse, UserService as UserExternalService } from '@libs/grpc';
-import { IsUserExistByLoginOrEmailRequest } from '@libs/grpc';
+import { IsUserExistByLoginOrEmailRequest, IsUserExistByLoginOrEmailResponse, UserService as UserExternalService } from '@libs/grpc';
 
 @Injectable()
 export class UserService implements OnModuleInit {
@@ -17,7 +15,8 @@ export class UserService implements OnModuleInit {
 
   public async isUserExistByLoginOrEmail(options: IsUserExistByLoginOrEmailRequest): Promise<IsUserExistByLoginOrEmailResponse> {
     const observableResponse = await this.userExternalService.isUserExistByLoginOrEmail(options);
+    const response = await observableResponse.toPromise();
 
-    return lastValueFrom(observableResponse);
+    return response;
   }
 }

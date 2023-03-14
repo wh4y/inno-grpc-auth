@@ -11,7 +11,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         transport: Transport.GRPC,
         options: {
           package: 'user',
-          protoPath: './libs/grpc/src/proto/user/user.proto',
+          protoPath: './libs/grpc/src/user/user.proto',
         },
       },
     ]),
